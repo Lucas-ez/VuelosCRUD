@@ -1,6 +1,29 @@
-﻿
+﻿@model VuelosCRUD.ViewModels.VuelosViewModel
+
 @{
 	ViewData["Title"] = "Vuelos";
 }
 
 <h1>Próximos Vuelos</h1>
+
+<table class="table table-striped">
+	<thead>
+		<tr>
+			<th scope="col">Horario llegada</th>
+			<th scope="col">Vuelo</th>
+			<th scope="col">Línea Aerea</th>
+			<th scope="col">Demorado</th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach(var vuelo in Model.Vuelos)
+		{
+			<tr>
+				<td>@vuelo.HorarioLLegada.ToString("HH:mm")</td>
+				<td>@vuelo.NumeroVuelo</td>
+				<td>@vuelo.LineaAerea</td>
+				<td>@(vuelo.Demorado ? "Si" : "No")</td>
+			</tr>
+		}
+	</tbody>
+</table>
