@@ -24,3 +24,24 @@ body {
 .container {
   max-width: 1200px;
 }
+
+.form {
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  max-width: 350px;
+}
+
+.form-group, .checkbox-group {
+  margin-block: 1rem;
+}
+
+.form-group,.checkbox-group label {
+  font-weight: 500;
+}
+
+.field-validation-error {
+  color: red;
+}

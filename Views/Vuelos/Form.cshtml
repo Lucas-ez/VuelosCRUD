@@ -1,10 +1,36 @@
 ﻿@model Vuelo
 
 @{
-  ViewData["Title"] = (Model.Id == null) ? "Alta" : "Modificación";
+  var isNew = Model == null || Model.Id == 0;
+  ViewData["Title"] = isNew ? "Alta" : "Modificación";
 }
 
 <div>
-  <h1>Titulo</h1>
-  
+  <h1>@(isNew ? "Alta" : "Modificación")</h1>
+  @using (Html.BeginForm("Save", "Vuelos"))
+  {
+    <div class="form-group">
+      @Html.LabelFor(v => v.HorarioLLegada)
+      @Html.TextBoxFor(v => v.HorarioLLegada, new {@placeholder = "HH/mm"})
+      @Html.ValidationMessageFor(v => v.HorarioLLegada)
+    </div>
+    <div class="form-group">
+      @Html.LabelFor(v => v.NumeroVuelo)
+      @Html.TextBoxFor(v => v.NumeroVuelo, new {@placeholder = "ej: AU 2239"})
+      @Html.ValidationMessageFor(v => v.NumeroVuelo)
+    </div>
+    <div class="form-group">
+      @Html.LabelFor(v => v.LineaAerea)
+      @Html.TextBoxFor(v => v.LineaAerea, new {@placeholder = "Nombre de la línea"})
+      @Html.ValidationMessageFor(v => v.LineaAerea)
+    </div>
+    <div class="checkbox-group">
+      <label>
+        @Html.CheckBoxFor(v => v.Demorado) Demorado
+      </label>
+    </div>
+    @Html.HiddenFor(v => v.Id)
+    @Html.AntiForgeryToken()
+    <button type="submit" class="btn btn-primary">Guardar</button>
+  }
 </div>
