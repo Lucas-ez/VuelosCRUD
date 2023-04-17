@@ -33,9 +33,14 @@ namespace VuelosCRUD.Controllers
     }
     public IActionResult Update()
     {
-      var vuelo = new Vuelo();
-
-      return View("Form", vuelo);
+      var vuelos = _context.Vuelos.ToList();
+      var viewModel = new VuelosViewModel { Vuelos = vuelos };
+      return View(viewModel);
+    }
+    public IActionResult UpdateById(Vuelo vuelo)
+    {
+      var updateVuelo = _context.Vuelos.Single(v => v.Id == vuelo.Id);
+      return View("Form", updateVuelo);
     }
     public IActionResult Delete()
     {
@@ -53,7 +58,6 @@ namespace VuelosCRUD.Controllers
 
       return RedirectPermanent("/Vuelos");
     }
-
 
     [ValidateAntiForgeryToken]
     [HttpPost]

@@ -1,0 +1,16 @@
+﻿@model VuelosCRUD.ViewModels.VuelosViewModel
+
+@{
+}
+
+<div>
+  <h1>Modificar</h1>
+  @using (Html.BeginForm("UpdateById", "Vuelos"))
+  {
+    <div class="form-group">
+      @Html.DropDownListFor(m => m.Id, new SelectList(Model.Vuelos, "Id", "NumeroVuelo"))
+      @Html.ValidationMessageFor(m => m.Id)
+    </div>
+    <button class="btn btn-primary">Seleccionar</button>
+  }
+</div>
