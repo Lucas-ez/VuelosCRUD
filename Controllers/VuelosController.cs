@@ -39,8 +39,21 @@ namespace VuelosCRUD.Controllers
     }
     public IActionResult Delete()
     {
-      return View();
+      var vuelos = _context.Vuelos.ToList();
+      var viewModel = new VuelosViewModel { Vuelos = vuelos };
+      return View(viewModel);
     }
+
+    public IActionResult DeleteById(Vuelo vuelo)
+    {
+      var deleteVuelo = _context.Vuelos.Single(v => v.Id == vuelo.Id);
+
+      _context.Remove(deleteVuelo);
+      _context.SaveChanges();
+
+      return RedirectPermanent("/Vuelos");
+    }
+
 
     [ValidateAntiForgeryToken]
     [HttpPost]
