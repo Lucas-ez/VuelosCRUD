@@ -7,30 +7,28 @@
 
 <div>
   <h1>@(isNew ? "Alta" : "Modificación")</h1>
-  @using (Html.BeginForm("Save", "Vuelos"))
-  {
+  <form asp-action="Save" method="POST">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <div class="form-group">
-      @Html.LabelFor(v => v.HorarioLLegada)
-      @Html.TextBoxFor(v => v.HorarioLLegada, new {@placeholder = "HH/mm"})
-      @Html.ValidationMessageFor(v => v.HorarioLLegada)
+      <label asp-for="HorarioLLegada" class="control-label"></label>
+      <input asp-for="HorarioLLegada" class="form-control" placeholder="HH/mm" />
+      <span asp-validation-for="HorarioLLegada" class="text-danger"></span>
     </div>
     <div class="form-group">
-      @Html.LabelFor(v => v.NumeroVuelo)
-      @Html.TextBoxFor(v => v.NumeroVuelo, new {@placeholder = "ej: AU 2239"})
-      @Html.ValidationMessageFor(v => v.NumeroVuelo)
+      <label asp-for="NumeroVuelo" class="control-label"></label>
+      <input asp-for="NumeroVuelo" class="form-control" placeholder="ej: AU 2239" />
+      <span asp-validation-for="NumeroVuelo" class="text-danger"></span>
     </div>
     <div class="form-group">
-      @Html.LabelFor(v => v.LineaAerea)
-      @Html.TextBoxFor(v => v.LineaAerea, new {@placeholder = "Nombre de la línea"})
-      @Html.ValidationMessageFor(v => v.LineaAerea)
+      <label asp-for="LineaAerea" class="control-label"></label>
+      <input asp-for="LineaAerea" class="form-control" placeholder="Nombre de la línea" />
+      <span asp-validation-for="LineaAerea" class="text-danger"></span>
     </div>
     <div class="checkbox-group">
-      <label>
-        @Html.CheckBoxFor(v => v.Demorado) Demorado
-      </label>
+      <input type="checkbox" asp-for="Demorado"/>
+      <label asp-for="Demorado"></label>
     </div>
-    @Html.HiddenFor(v => v.Id)
-    @Html.AntiForgeryToken()
+
     <button type="submit" class="btn btn-primary">Guardar</button>
-  }
+  </form>
 </div>
