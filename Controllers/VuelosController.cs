@@ -70,21 +70,13 @@ namespace VuelosCRUD.Controllers
         return View("Form", vuelo);
       }
 
-      Console.WriteLine(vuelo.Id);
-      Console.WriteLine("----------------------------------");
-
       if (vuelo.Id == 0)
       {
         _context.Vuelos.Add(vuelo);
       }
       else
       {
-        var vueloInDb = _context.Vuelos.Single(v => v.Id == vuelo.Id);
-
-        vueloInDb.NumeroVuelo = vuelo.NumeroVuelo;
-        vueloInDb.LineaAerea = vuelo.LineaAerea;
-        vueloInDb.HorarioLLegada = vuelo.HorarioLLegada;
-        vueloInDb.Demorado = vuelo.Demorado;
+        _context.Vuelos.Update(vuelo);
       }
 
       _context.SaveChanges();
