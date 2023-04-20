@@ -12,7 +12,6 @@
     <div class="form-group">
       <label asp-for="HorarioLLegada" class="control-label"></label>
       <input asp-for="HorarioLLegada" class="form-control" placeholder="HH/mm" />
-      <span asp-validation-for="HorarioLLegada" class="text-danger"></span>
     </div>
     <div class="form-group">
       <label asp-for="NumeroVuelo" class="control-label"></label>
@@ -28,7 +27,14 @@
       <input type="checkbox" asp-for="Demorado"/>
       <label asp-for="Demorado"></label>
     </div>
-
+    @if(isNew)
+    {
+      <input type="hidden" asp-for="Id" value="0"/>
+    } 
+    else
+    {
+      <input type="hidden" asp-for="Id"/>
+    }
     <button type="submit" class="btn btn-primary">Guardar</button>
   </form>
 </div>

@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using NuGet.Protocol;
 using VuelosCRUD.Models;
 using VuelosCRUD.ViewModels;
 
@@ -65,16 +64,14 @@ namespace VuelosCRUD.Controllers
     {
 
       //Validations
-      // ERROR toma 1 campo extra que no existe en la view
       var errors = ModelState.Values.SelectMany(v => v.Errors).ToList();
-      if (!ModelState.IsValid && errors.Count() > 1)
+      if (!ModelState.IsValid)
       {
-        Console.WriteLine(vuelo.ToJson());
-        Console.WriteLine(errors[0].ToJToken());
-        Console.WriteLine(errors.Count());
         return View("Form", vuelo);
       }
 
+      Console.WriteLine(vuelo.Id);
+      Console.WriteLine("----------------------------------");
 
       if (vuelo.Id == 0)
       {
@@ -92,7 +89,7 @@ namespace VuelosCRUD.Controllers
 
       _context.SaveChanges();
 
-      return RedirectPermanent("/Vuelos");
+      return RedirectToAction(nameof(Index));
     }
   }
 }
