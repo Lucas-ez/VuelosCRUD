@@ -6,24 +6,59 @@
 
 <h1>Próximos Vuelos</h1>
 
-<table class="table table-striped">
-	<thead>
-		<tr>
-			<th scope="col">Horario llegada</th>
-			<th scope="col">Vuelo</th>
-			<th scope="col">Línea Aerea</th>
-			<th scope="col">Demorado</th>
-		</tr>
-	</thead>
-	<tbody>
-		@foreach(var vuelo in Model.Vuelos)
-		{
+@if(Model.Vuelos.Count() > 0)
+{
+	<table class="table table-striped" id="table-vuelos">
+		<thead>
 			<tr>
-				<td>@vuelo.HorarioLLegada.ToString("HH:mm")</td>
-				<td>@vuelo.NumeroVuelo</td>
-				<td>@vuelo.LineaAerea</td>
-				<td>@(vuelo.Demorado ? "Si" : "No")</td>
+				<th scope="col">Horario llegada</th>
+				<th scope="col">Vuelo</th>
+				<th scope="col">Línea Aerea</th>
+				<th scope="col">Demorado</th>
 			</tr>
-		}
-	</tbody>
-</table>
+		</thead>
+		<tbody>
+				@foreach(var vuelo in Model.Vuelos)
+				{
+					<tr>
+						<td>@vuelo.HorarioLLegada.ToString("HH:mm")</td>
+						<td>@vuelo.NumeroVuelo</td>
+						<td>@vuelo.LineaAerea</td>
+						<td>@(vuelo.Demorado ? "Si" : "No")</td>
+					</tr>
+				}
+		</tbody>
+	</table>
+}
+else
+{
+	<p>No hay vuelos</p>
+}
+
+@section Scripts {
+	<script>
+		$(document).ready(() => {
+			$('#table-vuelos').DataTable({
+				language: {
+					"decimal": "",
+					"emptyTable" : "No Hay información",
+					"info": "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
+					"infoFiltered": "(Filtrado de _Max_ total entradas)",
+					"infoPostFix": "",
+					"thousands" : ",",
+					"lengthMenu" : "Mostrar _MENU_ Entradas",
+					"loadingRecords": "Cargando...",
+					"processing": "Procesando...",
+					"search" : "Buscar",
+					"zeroRecords":"Sin resultados encontrados",
+					"paginate" : {
+						"first": "Primero",
+						"last": "Ultimo",
+						"next": "Siguiente",
+						"previous" : "Anterior"
+					}
+				}
+			})
+		})
+	</script>
+}
